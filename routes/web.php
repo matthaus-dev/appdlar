@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,6 +11,11 @@ Route::get('/', function () {
     } else {
         return redirect()->to('/admin/cadastro');
     }
+});
+
+Route::get('send-email', function () {
+    $user = User::find(1);
+    $user->sendEmailVerificationNotification();
 });
 
 Route::get('/admin/cadastro', function () {
