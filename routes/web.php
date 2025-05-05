@@ -1,8 +1,9 @@
 <?php
 
+use App\Notifications\RecoveryPasswordCustom;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     if (env('APP_ENV' === 'production')) {
@@ -15,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('send-email', function () {
     $user = User::find(1);
-    $user->sendEmailVerificationNotification();
+    $user->notify(new RecoveryPasswordCustom());
 });
 
 Route::get('/admin/cadastro', function () {
